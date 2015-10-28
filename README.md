@@ -60,7 +60,7 @@ Get value
 
 ### access.set(obj, keys, value [, force])
 
-If the property already exists and is not an object, `access.set()` will do nothing.
+If the property already exists and is not an object, `access.set()` will do nothing by default.
 
 Use `force=true` to force setting the value, and the old property will be overidden.
 
