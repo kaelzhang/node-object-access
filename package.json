@@ -22,7 +22,9 @@
     "url": "https://github.com/kaelzhang/node-object-access/issues"
   },
   "devDependencies": {
+    "chai": "*",
+    "clone": "^1.0.2",
     "mocha": "*",
-    "chai": "*"
+    "run-mocha-cases": "^1.0.0"
   }
 }

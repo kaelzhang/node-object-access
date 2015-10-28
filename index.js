@@ -45,14 +45,14 @@ function set (obj, keys, value, force) {
   var sub;
   var is_object;
   while(i < len){
-    key = keys[i];
+    key = keys[i ++];
     sub = current[key];
     is_object = Object(sub) !== sub;
 
     // If the key is already found, and is not an object,
     // then we could not assign new key to the subtle object.
     // And if not `force`, then stop
-    if (key in current && is_object && !force) {
+    if (key in current && !is_object && !force) {
       return;
     }
 
