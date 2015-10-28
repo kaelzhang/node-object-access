@@ -1,6 +1,6 @@
 {
   "name": "object-access",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "Access(read and write) an object hierachically.",
   "main": "index.js",
   "scripts": {

@@ -3,13 +3,19 @@
 module.exports = access;
 access.get = access;
 access.set = set;
+access.remove = remove;
+
+
+function split_keys (keys) {
+  return typeof keys === 'string'
+    ? keys = keys.split('.')
+    : keys;
+}
 
 
 // @param {Array|string} keys
 function access (obj, keys, default_) {
-  if (typeof keys === 'string') {
-    keys = keys.split('.');
-  }
+  keys = split_keys(keys);
 
   var current = obj;
   var i = 0;
@@ -29,16 +35,27 @@ function access (obj, keys, default_) {
 
 // @param {Array|string} keys
 function set (obj, keys, value, force) {
+  keys = split_keys(keys);
+}
+
+
+function remove (obj, keys) {
+  keys = split_keys(keys);
+  _access(obj, keys, );
+}
+
+
+// @param {Array.<string>} keys
+// @param {function()} mutator
+function _access (obj, keys, mutator) {
   if (!obj || Object(obj) !== obj) {
     return;
   }
 
-  if (typeof keys === 'string') {
-    keys = keys.split('.');
-  }
+  keys = split_keys(keys);
 
   var current = obj;
-  var i = 0
+  var i = 0;
   var last = keys.pop();
   var len = keys.length;
   var key;
