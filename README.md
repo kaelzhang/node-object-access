@@ -11,7 +11,7 @@
 
 # object-access
 
-<!-- description -->
+Access(read and write) an object hierachically.
 
 ## Install
 
@@ -22,8 +22,47 @@ $ npm install object-access --save
 ## Usage
 
 ```js
-var object_access = require('object-access');
+var access = require('object-access');
+var obj = {
+  one: {
+    two: 2
+  }
+};
+
+// Get
+access(obj, 'one.two');                   // 2
+access(obj, ['one', 'two']);              // 2
+access(obj, ['one', 'three']);            // undefined
+access(obj, ['one', 'three', 'four']);    // undefined
+access(obj, ['one', 'three', 'four'], 4); // 4
+
+// Set
+access.set(obj, 'one.two', 3);            // obj.one.two.three  -> 3
+access.set(obj, ['one', 'two'], 5);       // obj.one.two.three  -> 4
+
+// If the subtle object is not found, it will create one
+access.set(obj, ['three', 'four'], 6);    // obj.three.four     -> 6
+access.set(obj, 'one.two.tree', 3);       // obj.one.two        -> 3
+                                          // `obj.one.two` exists, and is not an object, then skip
+
+// Force setting
+access.set(obj, 'one.two.tree', 3, true); // obj.one.two        -> {three: 3}
 ```
+
+### access(obj, keys [, default_value])
+### access.get(obj, keys [, default_value])
+
+Get value
+
+- obj `Object`
+- keys `Array|string` see the example above
+- default_value `any=` if keys not found, then returns the `default_value`, if `default_value` is not specified, `undefined` will be returned. 
+
+### access.set(obj, keys, value [, force])
+
+If the property already exists and is not an object, `access.set()` will do nothing.
+
+Use `force=true` to force setting the value, and the old property will be overidden.
 
 ## License
 

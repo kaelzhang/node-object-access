@@ -51,6 +51,20 @@ var get_cases = [
   },
 
   {
+    d: 'access, not found',
+    a: {
+      obj: {
+        a: {
+          b: {
+            c: 1
+          } 
+        }
+      },
+      keys: ['a', 'b', 'd', 'e']
+    }
+  },
+
+  {
     d: 'access, not found, with default',
     a: {
       obj: {

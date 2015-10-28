@@ -1,7 +1,7 @@
 {
   "name": "object-access",
-  "version": "1.0.0",
-  "description": "object-access",
+  "version": "1.0.1",
+  "description": "Access(read and write) an object hierachically.",
   "main": "index.js",
   "scripts": {
     "test": "mocha --reporter spec ./test/*.js"
