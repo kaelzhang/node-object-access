@@ -11,7 +11,7 @@
 
 # object-access
 
-Access(read and write) an object hierachically.
+Access(read, write and delete) an object by hierachical keys.
 
 ## Install
 
@@ -47,22 +47,30 @@ access.set(obj, 'one.two.tree', 3);       // obj.one.two        -> 3
 
 // Force setting
 access.set(obj, 'one.two.tree', 3, true); // obj.one.two        -> {three: 3}
+
+access.remove(obj, 'one.two.four');       // obj.one.two.four   -> undefined
+access.remove(obj, 'one.two.tree');       // obj.one.two        -> {}
+access.remove(obj, 'one.two');            // obj.one            -> {}
 ```
 
-### access(obj, keys [, default_value])
-### access.get(obj, keys [, default_value])
+### access(obj, key_list [, default_value])
+### access.get(obj, key_list [, default_value])
 
 Get value
 
 - obj `Object`
-- keys `Array|string` see the example above
-- default_value `any=` if keys not found, then returns the `default_value`, if `default_value` is not specified, `undefined` will be returned. 
+- key_list `Array|string` see the example above
+- default_value `any=` if key_list not found, then returns the `default_value`, if `default_value` is not specified, `undefined` will be returned. 
 
-### access.set(obj, keys, value [, force])
+### access.set(obj, key_list, value [, force])
 
 If the property already exists and is not an object, `access.set()` will do nothing by default.
 
 Use `force=true` to force setting the value, and the old property will be overidden.
+
+### access.remove(obj, key_list)
+
+Removes a key by deleting it if exists.
 
 ## License
 

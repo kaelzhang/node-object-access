@@ -15,39 +15,67 @@ function split_keys (keys) {
 
 // @param {Array|string} keys
 function access (obj, keys, default_) {
-  keys = split_keys(keys);
+  var value;
+  _access(obj, keys, function (parent, current, key, last) {
+    if (last) {
+      value = current;
 
-  var current = obj;
-  var i = 0;
-  var len = keys.length;
-
-  while(i < len){
-    if (!current) {
-      break;
+      // Actually there is no items to the right, however we return true
+      return true;
     }
 
-    current = current[keys[i ++]];
-  }
+    // Stop accessing.
+    if (!current) {
+      return true;
+    }
+  });
 
-  return current || default_;
+  return value || default_;
 }
 
 
 // @param {Array|string} keys
 function set (obj, keys, value, force) {
-  keys = split_keys(keys);
+  _access(obj, keys, function (parent, current, key, last) {
+    if (last) {
+      parent[key] = value;
+      return true;
+    }
+
+    var is_object = Object(current) !== current;
+
+    // If the key is already found, and is not an object,
+    // then we could not assign new key to the subtle object.
+    // And if not `force`, then stop
+    if (key in parent && !is_object && !force) {
+      return true;
+    }
+
+    parent[key] = is_object
+      ? current
+      // or assign a new object
+      : {};
+  });
 }
 
 
 function remove (obj, keys) {
-  keys = split_keys(keys);
-  _access(obj, keys, );
+  _access(obj, keys, function (parent, current, key, last) {
+    if (last) {
+      delete parent[key];
+      return true;
+    }
+
+    if (!current) {
+      return true;
+    }
+  });
 }
 
 
 // @param {Array.<string>} keys
 // @param {function()} mutator
-function _access (obj, keys, mutator) {
+function _access (obj, keys, iterator) {
   if (!obj || Object(obj) !== obj) {
     return;
   }
@@ -55,29 +83,10 @@ function _access (obj, keys, mutator) {
   keys = split_keys(keys);
 
   var current = obj;
-  var i = 0;
-  var last = keys.pop();
   var len = keys.length;
-  var key;
-  var sub;
-  var is_object;
-  while(i < len){
-    key = keys[i ++];
-    sub = current[key];
-    is_object = Object(sub) !== sub;
 
-    // If the key is already found, and is not an object,
-    // then we could not assign new key to the subtle object.
-    // And if not `force`, then stop
-    if (key in current && !is_object && !force) {
-      return;
-    }
-
-    current = current[key] = is_object
-      ? sub
-      // or assign a new object
-      : {};
-  }
-
-  current[last] = value;
+  keys.some(function (key, index) {
+    // If iterator returns `false`, `_access` will stop. 
+    return iterator(current, current = current[key], key, index === len - 1);
+  }, obj);
 }
