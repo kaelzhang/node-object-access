@@ -1,7 +1,7 @@
 {
   "name": "object-access",
-  "version": "1.1.0",
-  "description": "Access(read and write) an object hierachically.",
+  "version": "1.1.1",
+  "description": "Access(read, write and delete) an object by hierachical keys.",
   "main": "index.js",
   "scripts": {
     "test": "mocha --reporter spec ./test/*.js"
@@ -11,7 +11,12 @@
     "url": "git://github.com/kaelzhang/node-object-access.git"
   },
   "keywords": [
-    "object-access"
+    "object-access",
+    "object",
+    "set",
+    "get",
+    "remove",
+    "hierachical"
   ],
   "engines": {
     "node": ">=0.10.0"
