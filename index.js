@@ -42,7 +42,7 @@ function set (obj, keys, value, force) {
       return true;
     }
 
-    var is_object = Object(current) !== current;
+    var is_object = current && Object(current) !== current;
 
     // If the key is already found, and is not an object,
     // then we could not assign new key to the subtle object.
@@ -87,6 +87,10 @@ function _access (obj, keys, iterator) {
 
   keys.some(function (key, index) {
     // If iterator returns `false`, `_access` will stop. 
-    return iterator(current, current = current[key], key, index === len - 1);
+    var stop = iterator(current, current[key], key, index === len - 1);
+
+    // If key not exists, we should set `current` after the iterator.
+    current = current[key];
+    return stop;
   }, obj);
 }

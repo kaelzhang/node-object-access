@@ -250,6 +250,22 @@ function set_cases () {
     },
 
     {
+      d: 'set, create new key, root not found',
+      a: {
+        obj: {
+
+        },
+        keys: ['a', 'c'],
+        value: 2
+      },
+      e: {
+        a: {
+          c: 2
+        }
+      }
+    },
+
+    {
       d: 'set, string keys, exists, no force',
       a: {
         obj: {
