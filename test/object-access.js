@@ -85,6 +85,16 @@ function get_cases () {
     },
 
     {
+      d: 'access, not found 2',
+      a: {
+        obj: {
+
+        },
+        keys: ['a', 'b']
+      }
+    },
+
+    {
       d: 'access, not found, with default',
       a: {
         obj: {
