@@ -4,6 +4,7 @@ module.exports = access
 access.get = access
 access.set = set
 access.remove = remove
+access.delete = remove
 
 
 function split_keys (keys) {
