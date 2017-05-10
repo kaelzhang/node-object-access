@@ -1,27 +1,27 @@
-'use strict';
+'use strict'
 
-var expect = require('chai').expect;
-var access = require('../');
-var run = require('run-mocha-cases');
-var clone = require('clone');
+var expect = require('chai').expect
+var access = require('../')
+var run = require('run-mocha-cases')
+var clone = require('clone')
 
 run('access()', function(data){
-  return access(data.obj, data.keys, data.default);
-}).start(get_cases());
+  return access(data.obj, data.keys, data.default)
+}).start(get_cases())
 
 run('access.get()', function(data){
-  return access.get(data.obj, data.keys, data.default);
-}).start(get_cases());
+  return access.get(data.obj, data.keys, data.default)
+}).start(get_cases())
 
 run('access.set()', function(data){
-  access.set(data.obj, data.keys, data.value, data.force);
-  return data.obj;
-}).start(set_cases());
+  access.set(data.obj, data.keys, data.value, data.force)
+  return data.obj
+}).start(set_cases())
 
 run('access.remove()', function (data) {
-  access.remove(data.obj, data.keys);
+  access.remove(data.obj, data.keys)
   return data.obj
-}).start(remove_cases());
+}).start(remove_cases())
 
 
 function get_cases () {
@@ -33,7 +33,7 @@ function get_cases () {
           a: {
             b: {
               c: 1
-            } 
+            }
           }
         },
         keys: 'a.b.c'
@@ -48,7 +48,7 @@ function get_cases () {
           a: {
             b: {
               c: 1
-            } 
+            }
           }
         },
         keys: ['a', 'b', 'c']
@@ -63,7 +63,7 @@ function get_cases () {
           a: {
             b: {
               c: 1
-            } 
+            }
           }
         },
         keys: ['a', 'b', 'd']
@@ -77,7 +77,7 @@ function get_cases () {
           a: {
             b: {
               c: 1
-            } 
+            }
           }
         },
         keys: ['a', 'b', 'd', 'e']
@@ -101,7 +101,7 @@ function get_cases () {
           a: {
             b: {
               c: 1
-            } 
+            }
           }
         },
         keys: ['a', 'b', 'd'],
@@ -109,7 +109,7 @@ function get_cases () {
       },
       e: 'not found'
     }
-  ];
+  ]
 }
 
 
@@ -147,24 +147,6 @@ function set_cases () {
       e: {
         a: {
           b: 2
-        }
-      }
-    },
-
-    {
-      d: 'set, string keys, not found, no force',
-      a: {
-        obj: {
-          a: {
-            b: 1
-          }
-        },
-        keys: 'a.c',
-        value: 2
-      },
-      e: {
-        a: {
-          b: 1
         }
       }
     },
@@ -309,6 +291,7 @@ function set_cases () {
             b: 1
           }
         },
+        force: true,
         keys: 'a.b.c',
         value: 2
       },
@@ -329,6 +312,7 @@ function set_cases () {
             b: 1
           }
         },
+        force: true,
         keys: ['a', 'b', 'c'],
         value: 2
       },
@@ -340,7 +324,7 @@ function set_cases () {
         }
       }
     }
-  ];
+  ]
 }
 
 
@@ -430,5 +414,5 @@ function remove_cases () {
         }
       }
     }
-  ];
+  ]
 }

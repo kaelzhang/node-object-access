@@ -43,7 +43,7 @@ function set (obj, keys, value, force) {
       return true
     }
 
-    var is_object = current && Object(current) !== current
+    var is_object = current && Object(current) === current
 
     // If the key is already found, and is not an object,
     // then we could not assign new key to the subtle object.
