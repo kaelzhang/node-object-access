@@ -16,9 +16,10 @@ function split_keys (keys) {
 
 // @param {Array|string} keys
 function access (obj, keys, default_) {
-  var value
+  var value = default_
+
   _access(obj, keys, function (parent, current, key, last) {
-    if (last) {
+    if (last && key in parent) {
       value = current
 
       // Actually there is no items to the right, however we return true
@@ -31,7 +32,7 @@ function access (obj, keys, default_) {
     }
   })
 
-  return value || default_
+  return value
 }
 
 

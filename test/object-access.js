@@ -27,6 +27,31 @@ run('access.remove()', function (data) {
 function get_cases () {
   return [
     {
+      d: '#2: falsy value, with default',
+      a: {
+        obj: {
+          a: {
+            a: 0
+          }
+        },
+        keys: 'a.a',
+        default: 'not found'
+      },
+      e: 0
+    },
+    {
+      d: '#2: falsy value, without defualt',
+      a: {
+        obj: {
+          a: {
+            a: 0
+          }
+        },
+        keys: 'a.a'
+      },
+      e: 0
+    },
+    {
       d: 'access, string keys',
       a: {
         obj: {
