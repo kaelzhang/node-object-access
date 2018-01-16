@@ -11,7 +11,7 @@
 
 # object-access
 
-Access(read, write and delete) an object by hierachical keys. And it can be used as an alternative for the null propagation operator
+Access(read, write and delete) an object by hierarchical keys. And it can be used as an alternative for the null propagation operator
 
 ## Synopsis
 
