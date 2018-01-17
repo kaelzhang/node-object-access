@@ -1,6 +1,6 @@
 {
   "name": "object-access",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Access(read, write and delete) an object by hierarchical keys.",
   "main": "index.js",
   "scripts": {
@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "chai": "*",
-    "clone": "^1.0.2",
+    "clone": "^2.1.1",
     "mocha": "*",
     "run-mocha-cases": "^1.0.0"
   }
