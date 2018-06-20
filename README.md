@@ -45,16 +45,22 @@ access(obj, ['one', 'three', 'four'])     // undefined
 access(obj, ['one', 'three', 'four'], 4)  // 4
 
 // Set
-access.set(obj, 'one.two', 3)             // obj.one.two.three  -> 3
-access.set(obj, ['one', 'two'], 5)        // obj.one.two.three  -> 4
+access.set(obj, 'one.two', 3)             // 3
+// then obj.one.two.three is 3
+
+access.set(obj, ['one', 'two'], 4)        // 4
+// then obj.one.two.three is 4
 
 // If the subtle object is not found, it will create one
-access.set(obj, ['three', 'four'], 6)     // obj.three.four     -> 6
-access.set(obj, 'one.two.tree', 3)        // obj.one.two        -> 3
-                                          // `obj.one.two` exists, and is not an object, then skip
+access.set(obj, ['three', 'four'], 6)     // 6
+// then obj.three.four is 6
+
+// If we try to set a property on a none-object value, it will thrown.
+access.set(obj, 'one.two.tree', 3)        // Error thrown!
 
 // Force setting
-access.set(obj, 'one.two.tree', 3, true)  // obj.one.two        -> {three: 3}
+access.set(obj, 'one.two.tree', 3, true)  // true
+// obj.one.two is {three: 3}
 
 access.delete(obj, 'one.two.four')        // obj.one.two.four   -> undefined
 access.delete(obj, 'one.two.tree')        // obj.one.two        -> {}
