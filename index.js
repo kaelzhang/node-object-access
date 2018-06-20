@@ -50,7 +50,11 @@ function set (obj, keys, value, force) {
     // then we could not assign new key to the subtle object.
     // And if not `force`, then stop
     if (key in parent && !is_object && !force) {
-      return true
+      const err = new Error('refuse to set property on none object')
+      err.code = 'SET_ON_NONE_OBJECT'
+      err.keys = keys
+      err.value
+      throw err
     }
 
     parent[key] = is_object
@@ -58,13 +62,19 @@ function set (obj, keys, value, force) {
       // or assign a new object
       : {}
   })
+
+  return value
 }
 
 
 function remove (obj, keys) {
+  var succeeded = false
+
   _access(obj, keys, function (parent, current, key, last) {
     if (last) {
-      delete parent[key]
+      var has = key in parent
+      var deleted = delete parent[key]
+      succeeded = has && deleted
       return true
     }
 
@@ -72,6 +82,8 @@ function remove (obj, keys) {
       return true
     }
   })
+
+  return succeeded
 }
 
 

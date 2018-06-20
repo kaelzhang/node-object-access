@@ -72,16 +72,27 @@ Get value
 
 ### access.set(obj, key_list, value [, force])
 
-If the property already exists and is not an object, `access.set()` will do nothing by default.
+If the property already exists and is not an object, `access.set()` will throw an error whose `code` is `SET_ON_NONE_OBJECT`.
 
-Use `force=true` to force setting the value, and the old property will be overidden.
+If you want to force setting new values on none object value and override it, or to prevent any errors, use `force=true`.
 
+Returns `value`
 
-### access.delete(obj, key_list)
+### access.delete(obj, key_list) : boolean
 
 Removes a key by deleting it if exists.
 
+Returns `true` if succeeded otherwise `false`
+
 ### ~~access.remove(obj, key_list)~~ DEPRECATED in `1.2.0`
+
+## Upgrade from `1.x` to `2.x`
+
+Method  | `1.x` | `2.x`
+---- | ---- | ----
+set | no return value | has return value if there is no error
+set | never thrown | thrown if you try to set property on none object
+remove | no return value | has return value
 
 ## License
 

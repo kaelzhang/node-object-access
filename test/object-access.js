@@ -14,13 +14,19 @@ run('access.get()', function(data){
 }).start(get_cases())
 
 run('access.set()', function(data){
-  access.set(data.obj, data.keys, data.value, data.force)
-  return data.obj
+  var ret = access.set(data.obj, data.keys, data.value, data.force)
+  return {
+    ret: ret,
+    obj: data.obj
+  }
 }).start(set_cases())
 
 run('access.remove()', function (data) {
-  access.remove(data.obj, data.keys)
-  return data.obj
+  var ret = access.remove(data.obj, data.keys)
+  return {
+    ret: ret,
+    obj: data.obj
+  }
 }).start(remove_cases())
 
 
@@ -152,8 +158,11 @@ function set_cases () {
         value: 2
       },
       e: {
-        a: {
-          b: 2
+        ret: 2,
+        obj: {
+          a: {
+            b: 2
+          }
         }
       }
     },
@@ -170,8 +179,11 @@ function set_cases () {
         value: 2
       },
       e: {
-        a: {
-          b: 2
+        ret: 2,
+        obj: {
+          a: {
+            b: 2
+          }
         }
       }
     },
@@ -188,9 +200,12 @@ function set_cases () {
         value: 2
       },
       e: {
-        a: {
-          b: 1,
-          c: 2
+        ret: 2,
+        obj: {
+          a: {
+            b: 1,
+            c: 2
+          }
         }
       }
     },
@@ -207,9 +222,12 @@ function set_cases () {
         value: 2
       },
       e: {
-        a: {
-          b: 1,
-          c: 2
+        ret: 2,
+        obj: {
+          a: {
+            b: 1,
+            c: 2
+          }
         }
       }
     },
@@ -226,10 +244,13 @@ function set_cases () {
         value: 2
       },
       e: {
-        a: {
-          b: 1,
-          c: {
-            d: 2
+        ret: 2,
+        obj: {
+          a: {
+            b: 1,
+            c: {
+              d: 2
+            }
           }
         }
       }
@@ -247,10 +268,13 @@ function set_cases () {
         value: 2
       },
       e: {
-        a: {
-          b: 1,
-          c: {
-            d: 2
+        ret: 2,
+        obj: {
+          a: {
+            b: 1,
+            c: {
+              d: 2
+            }
           }
         }
       }
@@ -266,8 +290,11 @@ function set_cases () {
         value: 2
       },
       e: {
-        a: {
-          c: 2
+        ret: 2,
+        obj: {
+          a: {
+            c: 2
+          }
         }
       }
     },
@@ -283,11 +310,7 @@ function set_cases () {
         keys: 'a.b.c',
         value: 2
       },
-      e: {
-        a: {
-          b: 1
-        }
-      }
+      error: true
     },
 
     {
@@ -301,11 +324,7 @@ function set_cases () {
         keys: ['a', 'b', 'c'],
         value: 2
       },
-      e: {
-        a: {
-          b: 1
-        }
-      }
+      error: true
     },
 
     {
@@ -321,9 +340,12 @@ function set_cases () {
         value: 2
       },
       e: {
-        a: {
-          b: {
-            c: 2
+        ret: 2,
+        obj: {
+          a: {
+            b: {
+              c: 2
+            }
           }
         }
       }
@@ -342,9 +364,12 @@ function set_cases () {
         value: 2
       },
       e: {
-        a: {
-          b: {
-            c: 2
+        ret: 2,
+        obj: {
+          a: {
+            b: {
+              c: 2
+            }
           }
         }
       }
@@ -363,7 +388,10 @@ function remove_cases () {
         },
         keys: 'a'
       },
-      e: {}
+      e: {
+        ret: true,
+        obj: {}
+      }
     },
 
     {
@@ -374,7 +402,10 @@ function remove_cases () {
         },
         keys: ['a']
       },
-      e: {}
+      e: {
+        ret: true,
+        obj: {}
+      }
     },
 
     {
@@ -388,7 +419,10 @@ function remove_cases () {
         keys: ['a', 'b']
       },
       e: {
-        a: {}
+        ret: true,
+        obj: {
+          a: {}
+        }
       }
     },
 
@@ -405,7 +439,10 @@ function remove_cases () {
         keys: ['a', 'b']
       },
       e: {
-        a: {}
+        ret: true,
+        obj: {
+          a: {}
+        }
       }
     },
 
@@ -419,7 +456,10 @@ function remove_cases () {
         keys: ['b']
       },
       e: {
-        a: 1
+        ret: false,
+        obj: {
+          a: 1
+        }
       }
     },
 
@@ -434,8 +474,11 @@ function remove_cases () {
         keys: ['a', 'c']
       },
       e: {
-        a: {
-          b: 1
+        ret: false,
+        obj: {
+          a: {
+            b: 1
+          }
         }
       }
     }
