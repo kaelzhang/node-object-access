@@ -60,7 +60,7 @@ function set (obj, keys, value, force) {
     parent[key] = is_object
       ? current
       // or assign a new object
-      : {}
+      : Object.create(null)
   })
 
   return value
