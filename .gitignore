@@ -13,6 +13,7 @@
 *~
 *.sass-cache
 package-lock.json
+*.tgz
 
 # OS or Editor folders
 .DS_Store
