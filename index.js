@@ -39,6 +39,16 @@ function access (obj, keys, default_) {
 // @param {Array|string} keys
 function set (obj, keys, value, force) {
   _access(obj, keys, function (parent, current, key, last) {
+
+    // Avoid prototye pollution
+    if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
+      const err = new Error('refuse to modify prototype')
+      err.code = 'SET_ON_PROTOTYPE'
+      err.keys = keys
+      err.value
+      throw err
+    }
+
     if (last) {
       parent[key] = value
       return true

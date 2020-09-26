@@ -82,6 +82,8 @@ If the property already exists and is not an object, `access.set()` will throw a
 
 If you want to force setting new values on none object value and override it, or to prevent any errors, use `force=true`.
 
+If prototype pollution is attempted, `access.set()` will throw an error whose `code` is `SET_ON_PROTOTYPE`.
+
 Returns `value`
 
 ### access.delete(obj, key_list) : boolean
